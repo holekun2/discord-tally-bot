@@ -7,8 +7,9 @@ import json
 
 # Bot setup
 intents = discord.Intents.default()
-intents.message_content = True
-intents.members = True
+intents.message_content = True  # Required to read message content
+intents.members = False         # Not required for basic functionality
+intents.presences = False       # Not required for basic functionality
 bot = commands.Bot(command_prefix='!', intents=intents)
 
 # Data storage
