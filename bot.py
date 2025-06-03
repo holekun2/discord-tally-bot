@@ -6,11 +6,18 @@ from collections import defaultdict
 import json
 
 # Bot setup
-intents = discord.Intents.default()
-intents.message_content = True  # Required to read message content
-intents.members = False         # Not required for basic functionality
-intents.presences = False       # Not required for basic functionality
-bot = commands.Bot(command_prefix='!', intents=intents)
+# Create intents with only what we need
+intents = discord.Intents.none()  # Start with no intents
+intents.messages = True          # Required for message events
+intents.message_content = True   # Required to read message content
+
+# Initialize bot with minimal intents
+bot = commands.Bot(
+    command_prefix='!',
+    intents=intents,
+    # Disable unnecessary features that might require intents
+    help_command=None
+)
 
 # Data storage
 tally_data = {
