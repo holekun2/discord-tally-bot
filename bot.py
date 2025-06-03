@@ -5,18 +5,41 @@ from datetime import datetime, timedelta
 from collections import defaultdict
 import json
 
-# Bot setup
-# Create intents with only what we need
-intents = discord.Intents.none()  # Start with no intents
-intents.messages = True          # Required for message events
-intents.message_content = True   # Required to read message content
+# Bot setup - Explicitly define only the intents we need
+intents = discord.Intents(
+    guilds=True,           # Basic guild info
+    messages=True,         # Message events
+    message_content=True,  # Required for command content
+    # Everything else False
+    members=False,
+    presences=False,
+    voice_states=False,
+    typing=False,
+    reactions=False,
+    emojis=False,
+    webhooks=False,
+    integrations=False,
+    invites=False,
+    bans=False,
+    emojis_and_stickers=False,
+    guild_reactions=False,
+    guild_typing=False,
+    integrations_enabled=False,
+    webhooks_enabled=False,
+    invites_enabled=False,
+    voice=False,
+    guild_scheduled_events=False,
+    auto_moderation=False,
+    auto_moderation_configuration=False,
+    auto_moderation_execution=False
+)
 
-# Initialize bot with minimal intents
+# Initialize bot with minimal configuration
 bot = commands.Bot(
     command_prefix='!',
     intents=intents,
-    # Disable unnecessary features that might require intents
-    help_command=None
+    help_command=None,  # Disable default help command
+    case_insensitive=True
 )
 
 # Data storage
